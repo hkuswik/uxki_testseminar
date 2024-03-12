@@ -1,1 +1,1 @@
-# Web-Anwendung für "Wegweiser.UX-für-KI"-Testseminar
+## Web-Anwendung für "Wegweiser.UX-für-KI"-Testseminar
