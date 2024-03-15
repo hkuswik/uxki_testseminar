@@ -1,0 +1,57 @@
+* {
+  font-family: 'Open Sans', 'sans serif';
+  font-weight: 400;
+  font-size: calc(10px + 1vmin);
+  color: #21202b;
+}
+
+.App {
+  width: 100%;
+  height: 100%;
+  background-color: #A4E0DC;
+}
+
+.Header {
+  height: 10%;
+}
+
+.Mainpage {
+  width: 100%;
+}
+
+.Footer {
+  height: 6%;
+}
+
+.Footer a {
+  font-size: calc(8px + 1vmin);
+}
+
+.h1 {
+  font-size: calc(20px + 1vmin);
+  font-weight: 800;
+}
+
+.h2 {
+  font-size: calc(9px + 1vmin);
+  font-weight: 700;
+}
+
+.h3 {
+  font-size: calc(10px + 1vmin);
+  font-weight: 400;
+}
+
+.h4 {
+  font-size: calc(6px + 1vmin);
+  font-weight: 300;
+}
+
+.img-container {
+  overflow: hidden;
+}
+
+/* Tailwind */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
