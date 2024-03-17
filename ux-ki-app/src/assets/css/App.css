@@ -1,3 +1,4 @@
+/* General */
 * {
   font-family: 'Open Sans', 'sans serif';
   font-weight: 400;
@@ -11,6 +12,11 @@
   background-color: #A4E0DC;
 }
 
+.img-container {
+  overflow: hidden;
+}
+
+/* Layout */
 .Header {
   height: 10%;
 }
@@ -27,6 +33,7 @@
   font-size: calc(8px + 1vmin);
 }
 
+/* Typo */
 .h1 {
   font-size: calc(20px + 1vmin);
   font-weight: 800;
@@ -47,8 +54,58 @@
   font-weight: 300;
 }
 
-.img-container {
-  overflow: hidden;
+/* Smaller Elements */
+.arrow-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f1f0f4;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  transition: all .3s ease;
+  cursor: pointer;
+  width: 85%;
+}
+
+.arrow-btn>.arrow {
+  width: 11px;
+  height: 11px;
+  border-right: 2px solid #21202b;
+  border-bottom: 2px solid #21202b;
+  position: relative;
+  transform: rotate(-45deg);
+  margin: 0 6px;
+  transition: all .3s ease;
+}
+
+.arrow-btn>.arrow::before {
+  display: block;
+  background-color: currentColor;
+  width: 3px;
+  transform-origin: bottom right;
+  height: 2px;
+  position: absolute;
+  opacity: 0;
+  bottom: calc(-2px / 2);
+  transform: rotate(45deg);
+  transition: all .3s ease;
+  content: "";
+  right: 0;
+}
+
+.arrow-btn:hover>.arrow {
+  transform: rotate(-45deg) translate(5px, 5px);
+}
+
+.arrow-btn:hover>.arrow::before {
+  opacity: 1;
+  width: 10px;
+  border-radius: 10px;
+}
+
+.arrow-btn:hover {
+  opacity: 80%;
 }
 
 /* Tailwind */
