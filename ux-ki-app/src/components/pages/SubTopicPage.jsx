@@ -16,19 +16,40 @@ const SubTopicPage = () => {
     const [sectionTwoText, setSectionTwoText] = useState('lorem ipsum :)');
     const [sectionThreeText, setSectionThreeText] = useState('lorem ipsum :)');
 
+    const [initialScrollDone, setInitialScrollDone] = useState(false);
+    const [showToTopBtn, setShowToTopBtn] = useState(false);
+
     // scroll to specific content if it was clicked, or top of page
     useEffect(() => {
-        if (clickedContent !== undefined) {
-            // get index of content to scroll to correct section
-            const index = contentNames.indexOf(clickedContent);
-            scrollToElement(`section${index + 1}`);
+        if (!initialScrollDone) { // only use this scroll behavior initially
+            if (clickedContent !== undefined) {
+                // get index of content to scroll to correct section
+                const index = contentNames.indexOf(clickedContent);
+                scrollToElement(`section${index + 1}`);
+            } else {
+                window.scrollTo(0, 0); // else just scroll to top of page
+            }
+            setInitialScrollDone(true);
         } else {
-            window.scrollTo(0, 0); // else just scroll to top of page
+            // check scroll behavior for toTopBtn after initial scroll
+            window.addEventListener('scroll', handleScroll);
+            return () => {
+                window.removeEventListener('scroll', handleScroll);
+            };
         }
 
         // save if there is a third section to state
         setHasSectionThree(contentNames.length >= 3);
-    }, [clickedContent, subtopicId, topicContents, contentNames]);
+    }, [clickedContent, subtopicId, topicContents, contentNames, initialScrollDone]);
+
+    // only show toTopBtn if user scrolls 20px down
+    const handleScroll = () => {
+        if (window.scrollY > 20) {
+            setShowToTopBtn(true);
+        } else {
+            setShowToTopBtn(false);
+        }
+    };
 
     // set specific content according to subTopic
     useEffect(() => {
@@ -36,18 +57,6 @@ const SubTopicPage = () => {
         setSectionTwoText(topicContents[subtopicId][contentNames[1]]);
         hasSectionThree && setSectionThreeText(topicContents[subtopicId][contentNames[2]]);
     }, [subtopicId, topicContents, contentNames, hasSectionThree]);
-
-    // functionality to scroll back to top
-    let toTopBtn = document.getElementById("toTopBtn");
-    // show toTopBtn when user scrolls down 20px
-    window.onscroll = function () { scrollFunction() };
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            toTopBtn.style.display = "block";
-        } else {
-            toTopBtn.style.display = "none";
-        }
-    };
 
     return (
         <div style={subTopic_style}>
@@ -70,20 +79,19 @@ const SubTopicPage = () => {
                     <p className='text'>{sectionThreeText}</p>
                 </div>
             }
-            
-            <RightArrow onClick={() => toTopFunction()} id="toTopBtn" />
+            {showToTopBtn && <RightArrow onClick={scrollToTop} id="toTopBtn" />}
         </div>
     );
 };
 
-// helping function: scrolls to element by id
+// scrolls to element by id
 function scrollToElement(sectionId) {
     const elem = document.getElementById(sectionId);
     elem.scrollIntoView({ behavior: 'smooth' });
 };
 
-// helper function: scrolls to top
-function toTopFunction() {
+// scrolls to top
+function scrollToTop() {
     window.scrollTo({
         top: 0,
         behavior: 'smooth'

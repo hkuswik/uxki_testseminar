@@ -1,19 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import SubTopic from '../SubTopic';
 import AppContext from '../AppContext';
+import { ReactComponent as RightArrow } from '../../assets/images/right-arrow.svg';
 
 const MainPage = () => {
     const topicContents = useContext(AppContext);
     const topicNames = Object.keys(topicContents);
 
-    let toTopBtn = document.getElementById("toTopBtn");
-    // show toTopBtn when user scrolls down 20px
-    window.onscroll = function () { scrollFunction() };
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            toTopBtn.style.display = "block";
+    const [showToTopBtn, setShowToTopBtn] = useState(false);
+
+    // check scroll behavior for toTopBtn
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    // only show toTopBtn if user scrolls 20px down
+    const handleScroll = () => {
+        if (window.scrollY > 20) {
+            setShowToTopBtn(true);
         } else {
-            toTopBtn.style.display = "none";
+            setShowToTopBtn(false);
         }
     };
 
@@ -26,13 +35,13 @@ const MainPage = () => {
                 <SubTopic topicName={topicNames[2]} />
                 <SubTopic topicName={topicNames[3]} />
             </div>
-            <button onClick={() => toTopFunction()} id="toTopBtn">Top</button>
+            {showToTopBtn && <RightArrow onClick={scrollToTop} id="toTopBtn" />}
         </div>
     );
 };
 
-// helper function: scrolls smoothly to top
-function toTopFunction() {
+// scrolls to top
+function scrollToTop() {
     window.scrollTo({
         top: 0,
         behavior: 'smooth'

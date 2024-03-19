@@ -116,9 +116,8 @@
 }
 
 #toTopBtn {
-  display: none;
   position: fixed;
-  bottom: 60px;
+  bottom: 69px;
   right: 10px;
   z-index: 1;
   background-color: #b7b4c7;
