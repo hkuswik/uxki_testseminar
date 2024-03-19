@@ -5,6 +5,7 @@ import SubTopicPage from './components/pages/SubTopicPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AppContext from './components/AppContext';
+import NavigationBar from './components/NavigationBar';
 
 // static content of subtopics
 const topicContents = {
@@ -45,11 +46,16 @@ function App() {
     <div className='App'>
       <AppContext.Provider value={topicContents}>
         <BrowserRouter>
-          <Header />
-          <Routes>
-            <Route index element={<MainPage />} />
-            <Route path="subtopic/:subtopicId" element={<SubTopicPage />} />
-          </Routes>
+          <div className='flex'>
+            <NavigationBar />
+            <div className='flex flex-col w-full'>
+              <Header />
+              <Routes>
+                <Route index element={<MainPage />} />
+                <Route path="subtopic/:subtopicId" element={<SubTopicPage />} />
+              </Routes>
+            </div>
+          </div>
           <Footer />
         </BrowserRouter>
       </AppContext.Provider >

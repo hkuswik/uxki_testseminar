@@ -59,7 +59,7 @@ const SubTopicPage = () => {
     }, [subtopicId, topicContents, contentNames, hasSectionThree]);
 
     return (
-        <div style={subTopic_style}>
+        <div className='SubTopicPage' style={subTopic_style}>
             <div id="top" className='h1 mt-10 mb-20'>{subtopicId}</div>
             <div id="section1" style={{ ...section_style, background: '#f1f0f4' }}>
                 <p className='h2 mb-10 mt-14'>{contentNames[0]}</p>

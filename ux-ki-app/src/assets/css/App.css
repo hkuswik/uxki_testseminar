@@ -19,18 +19,43 @@
 /* Layout */
 .Header {
   height: 10%;
+  width: 85%;
+  margin-left: 15%;
 }
 
 .Mainpage {
-  width: 100%;
+  width: 85%;
+  margin-left: 15%;
+}
+
+.SubTopicPage {
+  width: 85%;
+  margin-left: 15%;
 }
 
 .Footer {
   height: 6%;
+  width: 85%;
+  margin-left: 15%;
 }
 
 .Footer a {
   font-size: calc(8px + 1vmin);
+}
+
+.Nav {
+  background-color: #21202b;
+  width: 15%;
+}
+
+.nav-btn {
+  color: white;
+  margin-top: 20px;
+  font-weight: 300;
+}
+
+.nav-btn:hover {
+  color: #d177b3;
 }
 
 /* Typo */
