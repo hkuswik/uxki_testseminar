@@ -54,6 +54,13 @@
   font-weight: 300;
 }
 
+.text {
+  font-size: calc(8px + 1vmin);
+  font-weight: 300;
+  margin: 0px 100px 100px 100px;
+  max-width: 1000px;
+}
+
 /* Smaller Elements */
 .arrow-btn {
   display: flex;
@@ -106,6 +113,26 @@
 
 .arrow-btn:hover {
   opacity: 80%;
+}
+
+#toTopBtn {
+  display: none;
+  position: fixed;
+  bottom: 60px;
+  right: 10px;
+  z-index: 1;
+  background-color: #b7b4c7;
+  fill: white;
+  cursor: pointer;
+  padding: 9px;
+  border-radius: 99px;
+  width: 50px;
+  height: 50px;
+  rotate: -90deg;
+}
+
+#toTopBtn:hover {
+  background-color: #d4d2dd;
 }
 
 /* Tailwind */

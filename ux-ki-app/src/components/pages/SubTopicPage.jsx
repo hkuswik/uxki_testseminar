@@ -1,49 +1,77 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import AppContext from '../AppContext';
+import { ReactComponent as RightArrow } from '../../assets/images/right-arrow.svg';
 
 const SubTopicPage = () => {
-    const { subtopicId } = useParams();
+    const { subtopicId } = useParams(); // get name of current subtopic
     const location = useLocation(); // get params from Link element
     const { clickedContent } = location.state || {}; // get clicked content from location state
+
     const topicContents = useContext(AppContext);
+    const contentNames = Object.keys(topicContents[subtopicId]);
+    const [hasSectionThree, setHasSectionThree] = useState(true);
 
+    const [videoContent, setVideoContent] = useState({ link: '', title: '' });
+    const [sectionTwoText, setSectionTwoText] = useState('lorem ipsum :)');
+    const [sectionThreeText, setSectionThreeText] = useState('lorem ipsum :)');
+
+    // scroll to specific content if it was clicked, or top of page
     useEffect(() => {
-        switch (subtopicId) {
-            case "Einleitung":
-                // TODO: set content
-                break;
-            case "Risikostufen":
-                // TODO: set content
-                break;
-            case "Designimplikationen":
-                // TODO: set content
-                break;
-            default:
-                console.log("wrong SubTopic ID");
-        };
-
         if (clickedContent !== undefined) {
-            const index = topicContents[subtopicId].indexOf(clickedContent);
+            // get index of content to scroll to correct section
+            const index = contentNames.indexOf(clickedContent);
             scrollToElement(`section${index + 1}`);
         } else {
             window.scrollTo(0, 0); // else just scroll to top of page
         }
-    }, [subtopicId, clickedContent, topicContents]);
 
-    // TODO: remove section placeholders with actual content
+        // save if there is a third section to state
+        setHasSectionThree(contentNames.length >= 3);
+    }, [clickedContent, subtopicId, topicContents, contentNames]);
+
+    // set specific content according to subTopic
+    useEffect(() => {
+        setVideoContent(topicContents[subtopicId][contentNames[0]]);
+        setSectionTwoText(topicContents[subtopicId][contentNames[1]]);
+        hasSectionThree && setSectionThreeText(topicContents[subtopicId][contentNames[2]]);
+    }, [subtopicId, topicContents, contentNames, hasSectionThree]);
+
+    // functionality to scroll back to top
+    let toTopBtn = document.getElementById("toTopBtn");
+    // show toTopBtn when user scrolls down 20px
+    window.onscroll = function () { scrollFunction() };
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            toTopBtn.style.display = "block";
+        } else {
+            toTopBtn.style.display = "none";
+        }
+    };
+
     return (
         <div style={subTopic_style}>
             <div id="top" className='h1 mt-10 mb-20'>{subtopicId}</div>
             <div id="section1" style={{ ...section_style, background: '#f1f0f4' }}>
-                Section 1
+                <p className='h2 mb-10 mt-14'>{contentNames[0]}</p>
+                <iframe
+                    src={videoContent.link}
+                    title={videoContent.title} allowFullScreen
+                    style={{ border: '0', height: '50vh', width: '60%', maxWidth: '900px', marginBottom: '100px' }}>
+                </iframe>
             </div>
             <div id="section2" style={section_style}>
-                Section 2
+                <p className='h2 mb-10 mt-14'>{contentNames[1]}</p>
+                <p className='text'>{sectionTwoText}</p>
             </div>
-            <div id="section3" style={{ ...section_style, background: '#f1f0f4' }}>
-                Section 3
-            </div>
+            {hasSectionThree &&
+                <div id="section3" style={{ ...section_style, background: '#f1f0f4' }}>
+                    <p className='h2 mb-10 mt-14'>{contentNames[2]}</p>
+                    <p className='text'>{sectionThreeText}</p>
+                </div>
+            }
+            
+            <RightArrow onClick={() => toTopFunction()} id="toTopBtn" />
         </div>
     );
 };
@@ -52,6 +80,14 @@ const SubTopicPage = () => {
 function scrollToElement(sectionId) {
     const elem = document.getElementById(sectionId);
     elem.scrollIntoView({ behavior: 'smooth' });
+};
+
+// helper function: scrolls to top
+function toTopFunction() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 };
 
 // styles

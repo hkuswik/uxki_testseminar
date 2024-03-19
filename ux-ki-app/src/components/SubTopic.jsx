@@ -2,15 +2,14 @@ import { useContext, useEffect, useState } from 'react';
 import AppContext from './AppContext';
 import { Link } from "react-router-dom";
 import exampleImg from '../assets/images/exampleImg.gif';
-import { ReactComponent as RightArrow } from '../assets/images/right-arrow.svg';
 
 const SubTopic = ({ topicName }) => {
     const topicContents = useContext(AppContext);
-    const [contents, setContents] = useState([]);
+    const [contentNames, setContentNames] = useState([]);
     const [isHovered, setIsHovered] = useState(false);
 
     useEffect(() => {
-        setContents(topicContents[topicName]);
+        setContentNames(Object.keys(topicContents[topicName]));
     }, [topicName, topicContents]);
 
     return (
@@ -21,7 +20,7 @@ const SubTopic = ({ topicName }) => {
                 </div>
                 <div className='h2 m-5 self-start' style={{ color: isHovered ? '#d177b3' : '#21202b' }}>{topicName}</div>
             </Link>
-            {contents.map((content, index) => (
+            {contentNames.map((content, index) => (
                 <Link to={`subtopic/${topicName}`} state={{ clickedContent: content }} key={index} className='h4 arrow-btn'>
                     {content}
                     <span className='arrow'></span>
@@ -31,6 +30,7 @@ const SubTopic = ({ topicName }) => {
     );
 };
 
+// styles
 const subTopic_style = {
     background: 'white',
     width: '320px',

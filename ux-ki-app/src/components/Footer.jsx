@@ -6,7 +6,7 @@ const Footer = () => {
       <a href="https://ux-fuer-ki.de/impressum.html" className='hover:underline'>Impressum</a>
       <a href="https://www.uni-luebeck.de/universitaet/universitaet.html" className='hover:underline'>Universität zu Lübeck</a>
     </div>
-  )
+  );
 };
 
 export default Footer;
