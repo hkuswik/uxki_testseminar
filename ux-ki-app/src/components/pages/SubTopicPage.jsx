@@ -61,7 +61,7 @@ const SubTopicPage = () => {
     return (
         <div className='SubTopicPage' style={subTopic_style}>
             <div id="top" className='h1 mt-10 mb-20'>{subtopicId}</div>
-            <div id="section1" style={{ ...section_style, background: '#f1f0f4' }}>
+            <div id="section1" style={{ ...section_style, background: '#77a9d1' }}>
                 <p className='h2 mb-10 mt-14'>{contentNames[0]}</p>
                 <iframe
                     src={videoContent.link}
@@ -69,12 +69,12 @@ const SubTopicPage = () => {
                     style={{ border: '0', height: '50vh', width: '60%', maxWidth: '900px', marginBottom: '100px' }}>
                 </iframe>
             </div>
-            <div id="section2" style={section_style}>
+            <div id="section2" style={{...section_style, background: '#8377d1'}}>
                 <p className='h2 mb-10 mt-14'>{contentNames[1]}</p>
                 <p className='text'>{sectionTwoText}</p>
             </div>
             {hasSectionThree &&
-                <div id="section3" style={{ ...section_style, background: '#f1f0f4' }}>
+                <div id="section3" style={{ ...section_style, background: '#c177d1' }}>
                     <p className='h2 mb-10 mt-14'>{contentNames[2]}</p>
                     <p className='text'>{sectionThreeText}</p>
                 </div>

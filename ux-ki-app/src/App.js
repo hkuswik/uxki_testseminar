@@ -36,7 +36,7 @@ const topicContents = {
       link: 'https://www.youtube-nocookie.com/embed/LDvVRvG7OB0?si=R1yp1rZWo-kn1qo0&amp;rel=0&amp;modestbranding=1',
       title: 'Einleitungsvideo'
     },
-    'Diskussion': 'text...',
+    'Diskussion': 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos temporibus itaque sit ipsa ex reiciendis, sint earum hic aliquid vel atque enim, inventore, magni numquam commodi iste? Quam, ab iure. Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur odit aut impedit facilis laboriosam, adipisci eaque eos incidunt ad tenetur debitis repudiandae eius non recusandae. Quo harum at nostrum veritatis.',
     'Lernüberprüfung': 'quiz?'
   }
 };

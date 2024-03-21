@@ -18,7 +18,7 @@ const SubTopic = ({ topicName }) => {
                 <div className="img-container h-24 w-full" style={{ background: '#817c9c', borderRadius: '10px 10px 0px 0px' }}>
                     <img src={exampleImg} alt="img-placeholder" />
                 </div>
-                <div className='h2 m-5 self-start' style={{ color: isHovered ? '#d177b3' : '#21202b' }}>{topicName}</div>
+                <div className='h2 m-5 self-start cursor-pointer' style={{ color: isHovered ? '#d177b3' : '#21202b' }}>{topicName}</div>
             </Link>
             {contentNames.map((content, index) => (
                 <Link to={`subtopic/${topicName}`} state={{ clickedContent: content }} key={index} className='h4 arrow-btn'>
